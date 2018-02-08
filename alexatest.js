@@ -1,15 +1,25 @@
-//Load HTTP module
-var http = require("http");
+    var http = require('http');
+    var server = http.createServer ( function(request,response){
 
-//Create HTTP server and listen on port 8000 for requests
-http.createServer(function (request, response) {
+    response.writeHead(200,{"Content-Type":"text\plain"});
+    if(request.method == "GET")
+        {
+            response.end("received GET request.");
+            console.log("new Get");
+        }
+    else if(request.method == "POST")
+        {
+            response.end("received POST request.");
+            console.log("new Post");
+            location.reload();
 
-   // Set the response HTTP header with HTTP status and Content type
-   response.writeHead(200, {'Content-Type': 'text/plain'});
-   
-   // Send the response body "Hello World"
-   response.end('Hello World\n');
-}).listen(8000);
+        }
+    else
+        {
+        	console.log("error")
+            response.end("Undefined request .");
+        }
+});
 
-// Print URL for accessing server
-console.log('Server running at http://127.0.0.1:8000/')
+server.listen(8000);
+console.log("Server running on port 8000");
